@@ -11,15 +11,17 @@ import polars as pl
 import pyarrow as pa
 
 from . import numba as numba_funcs
+from .factorization import (
+    factorize_1d,
+    factorize_2d,
+    monotonic_factorization,
+)
 from ..util import (
     ArrayType1D,
     ArrayType2D,
     to_arrow,
     is_categorical,
     array_split_with_chunk_handling,
-    factorize_1d,
-    factorize_2d,
-    monotonic_factorization,
     convert_data_to_arr_list_and_keys,
     get_array_name,
     series_is_numeric,

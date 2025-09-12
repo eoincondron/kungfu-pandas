@@ -3,6 +3,7 @@ import pandas as pd
 import pyarrow as pa
 import polars as pl
 import pytest
+import time
 
 from pandas_plus.groupby.core import GroupBy, add_row_margin, crosstab
 
@@ -438,6 +439,29 @@ class TestGroupBy:
             expected = values.groupby(pd.Series(key_data, name="key")).agg(method)
 
         assert_pd_equal(result, expected, check_dtype=False)
+
+    @pytest.mark.parametrize("n_uniques", [1000, 100_000, 10_000_000])
+    @pytest.mark.parametrize("n_levels", [2, 3])
+    def test_multi_key_large_data(self, n_levels, n_uniques):
+        np.random.seed(37)
+        N = 10_000_000
+        max_int = int(np.ceil(n_uniques ** (1 / n_levels)))
+        keys = [np.random.randint(0, max_int, N) for _ in range(n_levels)]
+        x = np.random.rand(N)
+
+        _ = GroupBy(keys).sum(x)
+
+        t0 = time.perf_counter()
+        result = GroupBy(keys).sum(x)
+        duration = time.perf_counter() - t0
+
+        t0 = time.perf_counter()
+        expected = pd.Series(x).groupby(keys).sum()
+        pandas_duration = time.perf_counter() - t0
+
+        pd.testing.assert_series_equal(result, expected)
+
+        assert pandas_duration > 1.5 * duration
 
 
 @pytest.mark.parametrize("nlevels", [1, 2, 3])

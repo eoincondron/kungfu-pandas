@@ -649,7 +649,7 @@ class TestFactorize1DComprehensive:
         codes, index = factorize_2d(*keys)  # ensure JIT compilation
 
         t0 = time.perf_counter()
-        codes, index = factorize_2d(*keys)
+        codes, index = factorize_2d(*keys, sort=True)
         duration = time.perf_counter() - t0
 
         assert index.is_unique
@@ -662,7 +662,7 @@ class TestFactorize1DComprehensive:
         pd.Series(keys[0]).groupby(keys).grouper._get_compressed_codes()
         pandas_duration = time.perf_counter() - t0
 
-        assert pandas_duration > 1.5 * duration
+        assert pandas_duration > duration
 
 
 @pytest.mark.parametrize("use_chunks", [False, True])

@@ -6,7 +6,7 @@ import pandas as pd
 import pyarrow as pa
 import polars as pl
 
-from pandas_plus.groupby.factorization import (
+from kung_fu_pandas.groupby.factorization import (
     factorize_1d,
     factorize_2d,
     monotonic_factorization,

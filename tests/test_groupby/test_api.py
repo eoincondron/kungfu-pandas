@@ -8,7 +8,7 @@ provide pandas-compatible behavior while leveraging the optimized core.
 import pytest
 import pandas as pd
 import numpy as np
-from pandas_plus.groupby import SeriesGroupBy, DataFrameGroupBy
+from kung_fu_pandas.groupby import SeriesGroupBy, DataFrameGroupBy
 
 
 class TestSeriesGroupBy:

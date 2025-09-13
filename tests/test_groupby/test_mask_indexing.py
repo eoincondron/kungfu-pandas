@@ -13,7 +13,7 @@ import pandas as pd
 import pyarrow as pa
 import pytest
 
-from pandas_plus.groupby.core import GroupBy
+from kung_fu_pandas.groupby.core import GroupBy
 
 from .conftest import assert_pd_equal
 

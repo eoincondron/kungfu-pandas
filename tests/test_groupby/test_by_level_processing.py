@@ -9,7 +9,7 @@ proper handling of non-string identifiers.
 import pytest
 import numpy as np
 import pandas as pd
-from pandas_plus.groupby.api import SeriesGroupBy, DataFrameGroupBy
+from kung_fu_pandas.groupby.api import SeriesGroupBy, DataFrameGroupBy
 
 from .conftest import assert_pd_equal
 

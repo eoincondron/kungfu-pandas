@@ -4,7 +4,7 @@ import pyarrow as pa
 import polars as pl
 import pytest
 
-from pandas_plus.groupby.core import GroupBy, add_row_margin, crosstab
+from kung_fu_pandas.groupby.core import GroupBy, add_row_margin, crosstab
 
 from .conftest import assert_pd_equal
 

@@ -7,7 +7,7 @@ import pyarrow as pa
 import numba as nb
 
 
-from pandas_plus.util import (
+from kung_fu_pandas.util import (
     get_array_name,
     parallel_map,
     ArrayType1D,

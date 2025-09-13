@@ -5,7 +5,7 @@ import pytest
 from inspect import signature
 from numba.typed import List as NumbaList
 
-from pandas_plus.groupby.numba import (
+from kung_fu_pandas.groupby.numba import (
     ScalarFuncs,
     _chunk_groupby_args,
     _apply_group_method_single_chunk,
@@ -27,8 +27,8 @@ from pandas_plus.groupby.numba import (
     cummin,
     cummax,
 )
-from pandas_plus.util import is_null as py_isnull, MIN_INT
-from pandas_plus.groupby import numba
+from kung_fu_pandas.util import is_null as py_isnull, MIN_INT
+from kung_fu_pandas.groupby import numba
 
 
 @nb.njit

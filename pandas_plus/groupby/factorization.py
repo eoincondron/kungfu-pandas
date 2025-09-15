@@ -296,30 +296,45 @@ def _weight_code_sum(codes: np.ndarray, weights: np.ndarray) -> int:
 
 
 @nb.njit
-def _combine_factorizations(codes, max_product, code_weights):
+def _combine_factorizations(
+    codes: np.ndarray,
+    code_weights: np.ndarray,
+    code_tracker: Union[np.ndarray, nb.typed.Dict],
+):
     combined_codes = np.zeros(len(codes), dtype="int64")
-    code_tracker = np.full(max_product, -1, dtype="int32")
-
     max_n_uniques = min(len(codes), max_product)
     uniques = codes[:max_n_uniques].copy()
+
     group_id = 0
+    tracker_is_array = len(code_tracker) > 0
     for i in range(len(combined_codes)):
         k = _weight_code_sum(codes[i], code_weights)
         if k == -1:
             combined_codes[i] = -1
-        elif code_tracker[k] == -1:
-            code_tracker[k] = group_id
-            combined_codes[i] = group_id
-            uniques[group_id] = codes[i]
-            group_id += 1
         else:
-            combined_codes[i] = code_tracker[k]
+            if tracker_is_array:
+                code = code_tracker[k]
+            elif k in code_tracker:
+                code = code_tracker[k]
+            else:
+                code = -1
+
+            if code == -1:
+                code_tracker[k] = group_id
+                combined_codes[i] = group_id
+                uniques[group_id] = codes[i]
+                group_id += 1
+            else:
+                combined_codes[i] = code_tracker[k]
 
     return combined_codes, uniques[:group_id]
 
 
 def factorize_2d(
-    *vals, sort: bool = False, factorize_in_parallel: bool = True
+    *vals,
+    sort: bool = False,
+    factorize_in_parallel: bool = True,
+    use_dict_limit: int = 500_000_000,
 ) -> Tuple[np.ndarray, pd.MultiIndex]:
     """
     Encode multiple 1-D arrays as enumerated types or categorical variables.
@@ -443,11 +458,19 @@ def factorize_2d(
     codes_list, labels = zip(*factored)
     shape = list(map(len, labels))
     code_arr = np.vstack(codes_list).T
-    max_product = np.prod(shape)
-    code_weights = max_product // np.cumprod(shape)
+
+    cartesian_product_size = np.prod(shape)
+    code_weights = cartesian_product_size // np.cumprod(shape)
+
+    if cartesian_product_size < use_dict_limit:
+        code_tracker = np.full(cartesian_product_size, -1, dtype="int32")
+    else:
+        code_tracker = nb.typed.Dict.empty(nb.types.int64, nb.types.int64)
 
     combined_codes, uniques = _combine_factorizations(
-        code_arr, max_product=max_product, code_weights=code_weights
+        code_arr,
+        code_weights=code_weights,
+        code_tracker=code_tracker,
     )
 
     multi_index = pd.MultiIndex(

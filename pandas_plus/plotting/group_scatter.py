@@ -3,11 +3,12 @@ from functools import cached_property
 
 import numpy as np
 import pandas as pd
+
 try:
     from sklearn import linear_model as lm
 except ModuleNotFoundError:
     print("scikit-learn is an optional dependency of pandas-plus need for GroupScatter")
-    raise 
+    raise
 
 from pandas_plus.util import ArrayType1D
 

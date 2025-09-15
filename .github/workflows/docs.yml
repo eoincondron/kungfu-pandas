@@ -70,11 +70,18 @@ jobs:
                         continue
         "
     
-    - name: Generate API documentation
+    - name: Build Sphinx documentation
       run: |
-        # This would generate API docs if sphinx is set up
-        echo "API documentation generation would happen here"
-        echo "Consider setting up sphinx autodoc for automatic API documentation"
+        cd docs
+        make html
+        echo "✓ Documentation built successfully"
+    
+    - name: Upload documentation artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: documentation-${{ github.sha }}
+        path: docs/build/html/
+        retention-days: 30
     
     - name: Check code examples in README
       run: |

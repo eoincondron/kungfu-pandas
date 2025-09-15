@@ -60,6 +60,12 @@ setup(
             "pytest>=6.0",
             "pytest-xdist",
         ],
+        "docs": [
+            "sphinx>=4.0",
+            "sphinx-rtd-theme",
+            "sphinxcontrib-napoleon",
+            "myst-parser",
+        ],
     },
     entry_points={
         "console_scripts": [

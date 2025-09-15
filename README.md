@@ -4,7 +4,7 @@ A high-performance extension package for pandas that provides fast groupby opera
 
 ## Overview
 
-```kungfu-pandas``` enhances Pandas groupby functionality with optimized implementations that leverage NumPy arrays and Numba's just-in-time compilation for significant performance improvements. The package is designed to work seamlessly with pandas DataFrames and Series while providing additional flexibility for various array types.
+`kungfu-pandas` enhances Pandas groupby functionality with optimized implementations that leverage NumPy arrays and Numba's just-in-time compilation for significant performance improvements. The package is designed to work seamlessly with pandas DataFrames and Series while providing additional flexibility for various array types.
 
 
 ## Faster GroupBy Operations
@@ -73,7 +73,7 @@ The core of kungfu-pandas is the `GroupBy` class located in `kungfu_pandas.group
 
 ### Supported Aggregation Methods
 
-The GroupBy class supports various aggregation functions:
+The GroupBy class supports various aggregation/selection functions:
 
 - `sum()/mean()` - Sum/mean of values in each group
 - `min()/max()` - Min/Max value in each group
@@ -81,8 +81,13 @@ The GroupBy class supports various aggregation functions:
 - `count()` - Count of non-null values in each group
 - `size()` - Total count of values in each group (including nulls)
 - `median()` - Median value in each group
-
-`GroupBy` also supports cumulative group-by methods and rolling group-by methods
+- `head()/tail()/` - The top/bottom N rows/elements in each group
+- `first()/last()` - The first/last non-null elements in each group
+- `nth()` - The nth row/element in each group
+- `shift()` - Shift elements group-wise
+- `diff()` - Diff elements group-wise
+- `rolling_[min()/max()/sum()/mean()]` - rolling aggregations
+- `cum[min()/max()/count()/sum()]` - cumulative aggregations
 
 ### Working with Pandas Data
 
@@ -265,7 +270,8 @@ kungfu-pandas provides significant performance improvements for large datasets:
 - pandas
 - numba
 - pyarrow
-- polars (optional, for polars Series support)
+- polars
+- scipy (optional for `GroupScatter` support)
 
 ## Development
 

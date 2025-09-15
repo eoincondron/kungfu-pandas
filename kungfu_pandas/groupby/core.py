@@ -274,16 +274,17 @@ class GroupBy:
             codes_list = [mono_codes, *codes_list]
             unique_list = [mono_uniques, *unique_list]
 
-        self._result_index = pd.Index(np.concatenate(unique_list)).unique()
+        self._result_index = pd.Index(np.concatenate(unique_list)).drop_duplicates()
 
         if self._sort:
             self._result_index = self._result_index.sort_values()
             self._index_is_sorted = True  # not necessary to sort now
 
-        arg_list = [(arr,) for arr in unique_list]
-        self._group_key_pointers = parallel_map(
-            self.result_index._engine.get_indexer, arg_list
-        )
+        def get_indexer(index, target):
+            return index.get_indexer(target)
+
+        arg_list = [(pd.Index(self.result_index), arr) for arr in unique_list]
+        self._group_key_pointers = parallel_map(get_indexer, arg_list)
         self._group_ikey = pa.chunked_array(codes_list)
 
     @property

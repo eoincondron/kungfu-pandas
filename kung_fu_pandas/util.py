@@ -453,7 +453,7 @@ def to_arrow(a: ArrayType1D, zero_copy_only: bool = True) -> pa.Array | pa.Chunk
     >>> import numpy as np
     >>> import pandas as pd
     >>> import pyarrow as pa
-    >>> from pandas_plus.util import to_arrow
+    >>> from kung_fu_pandas.util import to_arrow
 
     NumPy array conversion:
     >>> arr = np.array([1, 2, 3, 4, 5])

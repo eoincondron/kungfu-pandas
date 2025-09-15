@@ -22,7 +22,7 @@ Optimized group-by operations, particularly with categorical data (uses the exis
 
 
 ```python
-from pandas_plus.groupby import GroupBy
+from kung_fu_pandas.groupby import GroupBy
 
 arr = np.random.randint(0, 10, 10000)
 keys = arr % 3 + 2
@@ -66,7 +66,7 @@ conda install pandas-plus
 
 ## The GroupBy Class
 
-The core of pandas-plus is the `GroupBy` class located in `pandas_plus.groupby.core`. This class provides efficient groupby operations with a pandas-like API.
+The core of pandas-plus is the `GroupBy` class located in `kung_fu_pandas.groupby.core`. This class provides efficient groupby operations with a pandas-like API.
 
 ### Basic Usage
 
@@ -229,7 +229,7 @@ print(first_two)
 Create pivot tables using the crosstab function:
 
 ```python
-from pandas_plus.groupby import crosstab
+from kung_fu_pandas.groupby import crosstab
 
 # Sample data
 index_keys = ['Jan', 'Feb', 'Jan', 'Feb']

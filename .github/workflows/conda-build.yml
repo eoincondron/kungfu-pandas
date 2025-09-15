@@ -63,7 +63,7 @@ jobs:
 
         # Run basic import test
         python -c "
-        from pandas_plus.groupby import GroupBy
+        from kung_fu_pandas.groupby import GroupBy
         import pandas as pd
         import numpy as np
         

@@ -8,7 +8,7 @@ with open(os.path.join(this_directory, "README.md"), encoding="utf-8") as f:
 
 # Read version from __init__.py
 version = {}
-with open(os.path.join(this_directory, "pandas_plus", "__init__.py")) as f:
+with open(os.path.join(this_directory, "kung_fu_pandas", "__init__.py")) as f:
     exec(f.read(), version)
 
 setup(
@@ -63,7 +63,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "pandas-plus=pandas_plus.__main__:main",
+            "pandas-plus=kung_fu_pandas.__main__:main",
         ],
     },
     keywords="pandas groupby performance numba numpy data-analysis",

@@ -89,7 +89,7 @@ jobs:
     
     - name: Run full test suite
       run: |
-        pytest tests/ -v --cov=pandas_plus --cov-report=term-missing
+        pytest tests/ -v --cov=kung_fu_pandas --cov-report=term-missing
         
     - name: Build distributions
       run: |
@@ -105,7 +105,7 @@ jobs:
         pip uninstall pandas-plus -y || true
         pip install dist/*.whl
         python -c "
-        from pandas_plus.groupby import GroupBy
+        from kung_fu_pandas.groupby import GroupBy
         import pandas as pd
         import numpy as np
         gb = GroupBy(pd.Series([0,0,1,1]))

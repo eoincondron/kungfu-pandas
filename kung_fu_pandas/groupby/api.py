@@ -443,7 +443,7 @@ class SeriesGroupBy(BaseGroupBy):
     --------
     Basic grouping:
     >>> import pandas as pd
-    >>> from pandas_plus.groupby import SeriesGroupBy
+    >>> from kung_fu_pandas.groupby import SeriesGroupBy
     >>> s = pd.Series([1, 2, 3, 4, 5, 6])
     >>> groups = pd.Series(['A', 'B', 'A', 'B', 'A', 'B'])
     >>> gb = SeriesGroupBy(s, by=groups)
@@ -684,7 +684,7 @@ class DataFrameGroupBy(BaseGroupBy):
     --------
     Basic grouping:
     >>> import pandas as pd
-    >>> from pandas_plus.groupby import DataFrameGroupBy
+    >>> from kung_fu_pandas.groupby import DataFrameGroupBy
     >>> df = pd.DataFrame({'A': [1, 2, 3, 4], 'B': [10, 20, 30, 40]})
     >>> groups = pd.Series(['X', 'Y', 'X', 'Y'])
     >>> gb = DataFrameGroupBy(df, by=groups)

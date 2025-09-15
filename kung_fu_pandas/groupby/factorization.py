@@ -153,7 +153,7 @@ def factorize_1d(
 
     This method is useful for obtaining a numeric representation of an
     array when all that matters is identifying distinct values. factorize_1d
-    is available as both a top-level function :func:`~pandas_plus.util.factorize_1d`,
+    is available as both a top-level function :func:`~kung_fu_pandas.util.factorize_1d`,
     and as a method.
 
     Parameters
@@ -197,7 +197,7 @@ def factorize_1d(
     --------
     >>> import numpy as np
     >>> import pandas as pd
-    >>> from pandas_plus.util import factorize_1d
+    >>> from kung_fu_pandas.util import factorize_1d
 
     Basic usage with a list:
 
@@ -378,7 +378,7 @@ def factorize_2d(*vals, sort: bool = False):
     --------
     >>> import numpy as np
     >>> import pandas as pd
-    >>> from pandas_plus.util import factorize_2d
+    >>> from kung_fu_pandas.util import factorize_2d
 
     Basic usage with two arrays:
 

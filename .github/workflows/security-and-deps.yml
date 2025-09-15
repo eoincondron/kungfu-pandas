@@ -41,8 +41,8 @@ jobs:
     
     - name: Run bandit security linter
       run: |
-        bandit -r pandas_plus/ -f json -o bandit-report.json || true
-        bandit -r pandas_plus/ -ll
+        bandit -r kung_fu_pandas/ -f json -o bandit-report.json || true
+        bandit -r kung_fu_pandas/ -ll
     
     - name: Upload security reports
       if: always()
@@ -74,23 +74,23 @@ jobs:
     
     - name: Check code formatting with black
       run: |
-        black --check --diff pandas_plus/ tests/
+        black --check --diff kung_fu_pandas/ tests/
     
     - name: Check import sorting with isort
       run: |
-        isort --check-only --diff pandas_plus/ tests/
+        isort --check-only --diff kung_fu_pandas/ tests/
     
     - name: Run flake8 linting
       run: |
-        flake8 pandas_plus/ tests/ --statistics
+        flake8 kung_fu_pandas/ tests/ --statistics
     
     - name: Run mypy type checking
       run: |
-        mypy pandas_plus/ --ignore-missing-imports --show-error-codes
+        mypy kung_fu_pandas/ --ignore-missing-imports --show-error-codes
     
     - name: Run pylint
       run: |
-        pylint pandas_plus/ --rcfile=.pylintrc || true
+        pylint kung_fu_pandas/ --rcfile=.pylintrc || true
 
   dependency-update:
     name: Check for Dependency Updates
@@ -196,7 +196,7 @@ jobs:
         print(f'PyArrow: {pa.__version__}')
         
         # Test basic functionality
-        from pandas_plus.groupby import GroupBy
+        from kung_fu_pandas.groupby import GroupBy
         gb = GroupBy(pd.Series([0,0,1,1]))
         result = gb.sum(pd.Series([1,2,3,4]))
         assert len(result) == 2

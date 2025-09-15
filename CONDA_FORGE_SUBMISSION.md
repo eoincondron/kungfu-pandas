@@ -25,7 +25,7 @@ package:
 
 # Source from PyPI (conda-forge requirement)
 source:
-  url: https://pypi.io/packages/source/p/pandas-plus/pandas_plus-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/p/pandas-plus/kung_fu_pandas-{{ version }}.tar.gz
   sha256: {{ sha256 }}
 
 # Dependencies available on conda-forge
@@ -56,8 +56,8 @@ If automatic detection fails:
 4. Update sha256 hash from PyPI:
    ```bash
    # Get sha256 from PyPI download
-   wget https://pypi.io/packages/source/p/pandas-plus/pandas_plus-0.1.0.tar.gz
-   sha256sum pandas_plus-0.1.0.tar.gz
+   wget https://pypi.io/packages/source/p/pandas-plus/kung_fu_pandas-0.1.0.tar.gz
+   sha256sum kung_fu_pandas-0.1.0.tar.gz
    ```
 5. Commit and push:
    ```bash

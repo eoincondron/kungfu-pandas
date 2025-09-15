@@ -96,7 +96,7 @@ test:conda-package:
   script:
     - source activate $CONDA_ENV
     - conda install -c ./conda-packages $PACKAGE_NAME
-    - python -c "import pandas_plus; print('Package installed successfully')"
+    - python -c "import kung_fu_pandas; print('Package installed successfully')"
     - python -m pytest tests/ -v --tb=short
   only:
     - tags
@@ -155,10 +155,10 @@ lint:
   before_script:
     - pip install black flake8 isort mypy
   script:
-    - black --check --diff pandas_plus/
-    - flake8 pandas_plus/
-    - isort --check-only --diff pandas_plus/
-    - mypy pandas_plus/ --ignore-missing-imports
+    - black --check --diff kung_fu_pandas/
+    - flake8 kung_fu_pandas/
+    - isort --check-only --diff kung_fu_pandas/
+    - mypy kung_fu_pandas/ --ignore-missing-imports
   allow_failure: true
   only:
     - merge_requests
@@ -172,7 +172,7 @@ security:
   before_script:
     - pip install bandit safety
   script:
-    - bandit -r pandas_plus/
+    - bandit -r kung_fu_pandas/
     - safety check --json
   allow_failure: true
   only:

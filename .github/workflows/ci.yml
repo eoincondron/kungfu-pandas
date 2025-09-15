@@ -54,11 +54,11 @@ jobs:
     - name: Type check with mypy
       run: |
         pip install mypy
-        mypy pandas_plus --ignore-missing-imports || true
+        mypy kung_fu_pandas --ignore-missing-imports || true
 
     - name: Test with pytest
       run: |
-        pytest tests/ -v --cov=pandas_plus --cov-report=xml --cov-report=term
+        pytest tests/ -v --cov=kung_fu_pandas --cov-report=xml --cov-report=term
 
     - name: Upload to Codecov
       uses: codecov/codecov-action@v4

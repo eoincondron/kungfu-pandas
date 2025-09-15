@@ -38,7 +38,7 @@ def groupby_fast_series(
     Examples
     --------
     >>> import pandas as pd
-    >>> from pandas_plus.groupby import install_groupby_fast
+    >>> from kung_fu_pandas.groupby import install_groupby_fast
     >>> install_groupby_fast()  # Add groupby_fast methods
     >>>
     >>> s = pd.Series([1, 2, 3, 4, 5, 6])
@@ -80,7 +80,7 @@ def groupby_fast_dataframe(
     Examples
     --------
     >>> import pandas as pd
-    >>> from pandas_plus.groupby import install_groupby_fast
+    >>> from kung_fu_pandas.groupby import install_groupby_fast
     >>> install_groupby_fast()  # Add groupby_fast methods
     >>>
     >>> df = pd.DataFrame({'A': [1, 2, 3, 4], 'B': [10, 20, 30, 40]})
@@ -105,7 +105,7 @@ def install_groupby_fast():
     Examples
     --------
     >>> import pandas as pd
-    >>> from pandas_plus.groupby import install_groupby_fast
+    >>> from kung_fu_pandas.groupby import install_groupby_fast
     >>>
     >>> # Install the fast groupby methods
     >>> install_groupby_fast()

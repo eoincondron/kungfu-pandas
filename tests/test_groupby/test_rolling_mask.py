@@ -5,7 +5,7 @@ Unit tests for rolling methods with mask parameter functionality.
 import pytest
 import numpy as np
 import pandas as pd
-from pandas_plus.groupby.api import SeriesGroupBy, DataFrameGroupBy
+from kungfu_pandas.groupby.api import SeriesGroupBy, DataFrameGroupBy
 
 
 class TestRollingMask:

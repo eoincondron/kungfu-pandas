@@ -6,7 +6,7 @@ import polars.testing
 import pytest
 import pyarrow as pa
 
-from pandas_plus.util import (
+from kungfu_pandas.util import (
     MAX_INT,
     MIN_INT,
     _get_first_non_null,

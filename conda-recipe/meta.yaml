@@ -1,4 +1,4 @@
-{% set name = "pandas-plus" %}
+{% set name = "kungfu-pandas" %}
 {% set version = "0.1.0" %}
 
 package:
@@ -13,7 +13,7 @@ build:
   number: 0
   script: python -m pip install . -vv
   entry_points:
-    - pandas-plus = pandas_plus:__main__
+    - kungfu-pandas = pandas_plus:__main__
 
 requirements:
   host:
@@ -39,7 +39,7 @@ test:
     - pandas_plus.nanops
     - pandas_plus.util
   commands:
-    - python -c "import pandas_plus; print('pandas-plus imported successfully')"
+    - python -c "import pandas_plus; print('kungfu-pandas imported successfully')"
   requires:
     - pytest >=6.0
     - pytest-xdist
@@ -49,17 +49,17 @@ test:
     - python -m pytest tests/ -v --tb=short
 
 about:
-  home: https://github.com/eoincondron/pandas-plus
+  home: https://github.com/eoincondron/kungfu-pandas
   license: MIT
   license_family: MIT
   summary: High-performance extension package for pandas with fast groupby operations
   description: |
-    pandas-plus enhances pandas' groupby functionality with optimized implementations 
+    kungfu-pandas enhances pandas' groupby functionality with optimized implementations 
     that leverage NumPy arrays and Numba's just-in-time compilation for significant 
     performance improvements. The package is designed to work seamlessly with pandas 
     DataFrames and Series while providing additional flexibility for various array types.
-  doc_url: https://github.com/eoincondron/pandas-plus
-  dev_url: https://github.com/eoincondron/pandas-plus
+  doc_url: https://github.com/eoincondron/kungfu-pandas
+  dev_url: https://github.com/eoincondron/kungfu-pandas
 
 extra:
   recipe-maintainers:

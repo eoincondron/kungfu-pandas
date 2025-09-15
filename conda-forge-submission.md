@@ -1,4 +1,4 @@
-# Conda-Forge Submission Guide for pandas-plus
+# Conda-Forge Submission Guide for kungfu-pandas
 
 ## Prerequisites (Action Required)
 
@@ -54,11 +54,11 @@ git clone https://github.com/YOUR_USERNAME/staged-recipes.git
 cd staged-recipes
 
 # Create new branch
-git checkout -b pandas-plus-recipe
+git checkout -b kungfu-pandas-recipe
 
 # Create recipe directory
-mkdir recipes/pandas-plus
-cp /path/to/pandas-plus/conda-forge-recipe/meta.yaml recipes/pandas-plus/
+mkdir recipes/kungfu-pandas
+cp /path/to/kungfu-pandas/conda-forge-recipe/meta.yaml recipes/kungfu-pandas/
 ```
 
 ### Step 3: Test Recipe Locally (Optional but Recommended)
@@ -67,7 +67,7 @@ cp /path/to/pandas-plus/conda-forge-recipe/meta.yaml recipes/pandas-plus/
 conda install conda-smithy
 
 # Lint the recipe
-cd recipes/pandas-plus
+cd recipes/kungfu-pandas
 conda smithy recipe-lint .
 
 # Build locally (if you have conda-build)
@@ -77,9 +77,9 @@ conda build .
 ### Step 4: Submit Pull Request
 1. Commit and push your changes:
 ```bash
-git add recipes/pandas-plus/
-git commit -m "Add pandas-plus recipe"
-git push origin pandas-plus-recipe
+git add recipes/kungfu-pandas/
+git commit -m "Add kungfu-pandas recipe"
+git push origin kungfu-pandas-recipe
 ```
 
 2. Go to your fork on GitHub and create a Pull Request
@@ -105,10 +105,10 @@ The prepared recipe (`conda-forge-recipe/meta.yaml`) includes:
 ## Next Steps After Acceptance
 
 Once your recipe is accepted:
-1. A new repository `pandas-plus-feedstock` will be created
+1. A new repository `kungfu-pandas-feedstock` will be created
 2. You'll be added as a maintainer
 3. Future updates can be automated via bots or manual PRs to the feedstock
-4. Your package will be available via: `conda install -c conda-forge pandas-plus`
+4. Your package will be available via: `conda install -c conda-forge kungfu-pandas`
 
 ## Resources
 - [Conda-forge documentation](https://conda-forge.org/docs/)

@@ -12,7 +12,7 @@ import pyarrow as pa
 import polars as pl
 import pytest
 
-from pandas_plus.groupby.core import GroupBy
+from kungfu_pandas.groupby.core import GroupBy
 
 from .conftest import assert_pd_equal
 

@@ -1,4 +1,4 @@
-name: pandas-plus-env
+name: kungfu-pandas-env
 channels:
   - conda-forge
   - defaults

@@ -9,7 +9,7 @@ on:
     types: [published]
 
 env:
-  PACKAGE_NAME: pandas-plus
+  PACKAGE_NAME: kungfu-pandas
 
 jobs:
   test:
@@ -54,11 +54,11 @@ jobs:
     - name: Type check with mypy
       run: |
         pip install mypy
-        mypy pandas_plus --ignore-missing-imports || true
+        mypy kungfu_pandas --ignore-missing-imports || true
 
     - name: Test with pytest
       run: |
-        pytest tests/ -v --cov=pandas_plus --cov-report=xml --cov-report=term
+        pytest tests/ -v --cov=kungfu_pandas --cov-report=xml --cov-report=term
 
     - name: Upload to Codecov
       uses: codecov/codecov-action@v4
@@ -113,7 +113,7 @@ jobs:
     if: github.event_name == 'release' && github.event.action == 'published'
     environment:
       name: pypi
-      url: https://pypi.org/p/pandas-plus
+      url: https://pypi.org/p/kungfu-pandas
 
     steps:
     - name: Download distribution artifacts
@@ -138,5 +138,5 @@ jobs:
     - name: Trigger conda-forge bot
       run: |
         echo "PyPI release published. conda-forge bot should automatically detect and create PR."
-        echo "Monitor: https://github.com/conda-forge/pandas-plus-feedstock"
+        echo "Monitor: https://github.com/conda-forge/kungfu-pandas-feedstock"
         echo "If no automatic PR appears within 24h, create manual PR to feedstock."

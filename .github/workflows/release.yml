@@ -17,6 +17,10 @@ on:
 env:
   PYTHON_VERSION: '3.12'
 
+permissions:
+  contents: read
+  id-token: write  # Required for OIDC token retrieval
+
 jobs:
   validate-release:
     name: Validate Release
@@ -125,9 +129,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: [validate-release, build-and-test]
     if: github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && github.event.inputs.publish_pypi == 'true')
+    permissions:
+      id-token: write  # Required for OIDC token retrieval
     environment:
       name: pypi
-      url: https://pypi.org/p/kungfu-pandas
+      url: https://pypi.org/p/pandas-kungfu
     
     steps:
     - name: Download build artifacts
@@ -139,9 +145,8 @@ jobs:
     - name: Publish to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
         verbose: true
+        # Uses OIDC trusted publishing - no API token needed
 
   update-conda-forge:
     name: Update conda-forge recipe

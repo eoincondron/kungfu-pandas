@@ -1,3 +1,5 @@
+from functools import partial
+
 import numba as nb
 import numpy as np
 import pandas as pd
@@ -169,8 +171,8 @@ def reduce_2d(
     """
     if axis == 0:
         arr = arr.T
-    mapper = lambda x: reduce_1d(
-        reduce_func_name, x, skipna=skipna, n_threads=n_threads
+    mapper = partial(
+        reduce_1d, reduce_func_name=reduce_func_name, skipna=skipna, n_threads=n_threads
     )
     if n_threads == 1:
         results = list(map(mapper, arr))

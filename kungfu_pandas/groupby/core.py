@@ -119,26 +119,26 @@ def groupby_method(method):
     if method.__doc__ is None:
         __doc__ = f"""
         Calculate the group-wise {method.__name__} of the given values over the groups defined by `key`
-        
+
         Parameters
         ----------
         key: An array/Series or a container of same, such as dict, list or DataFrame
-            Defines the groups. May be a single dimension like an array or Series, 
-            or multi-dimensional like a list/dict of 1-D arrays or 2-D array/DataFrame. 
+            Defines the groups. May be a single dimension like an array or Series,
+            or multi-dimensional like a list/dict of 1-D arrays or 2-D array/DataFrame.
         values: An array/Series or a container of same, such as dict, list or DataFrame
-            The values to be aggregated. May be a single dimension like an array or Series, 
-            or multi-dimensional like a list/dict of 1-D arrays or 2-D array/DataFrame. 
+            The values to be aggregated. May be a single dimension like an array or Series,
+            or multi-dimensional like a list/dict of 1-D arrays or 2-D array/DataFrame.
         mask: array/Series
             Optional Boolean array which filters elements out of the calculations
-            
+
         Returns
         -------
         pd.Series / pd.DataFrame
-        
-        The result of the group-by calculation. 
-        A Series is returned when `values` is a single array/Series, otherwise a DataFrame. 
-        The index of the result has one level per array/column in the group key. 
-            
+
+        The result of the group-by calculation.
+        A Series is returned when `values` is a single array/Series, otherwise a DataFrame.
+        The index of the result has one level per array/column in the group key.
+
         """
         wrapper.__doc__ = __doc__
 

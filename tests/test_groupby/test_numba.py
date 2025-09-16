@@ -479,8 +479,8 @@ class TestGroupNearbyMembers:
 class TestNullChecks:
     def test_is_null_with_nan(self):
         """Test that _is_null identifies NaN values correctly."""
-        assert is_null(np.nan) == True
-        assert is_null(np.float64("nan")) == True
+        assert is_null(np.nan)
+        assert is_null(np.float64("nan"))
 
     def test_is_null_with_numbers(self):
         """Test that _is_null returns False for valid numbers."""
@@ -490,7 +490,7 @@ class TestNullChecks:
 
     def test_is_null_with_min_int(self):
         """Test that is_null identifies MIN_INT correctly."""
-        assert is_null(MIN_INT) == True
+        assert is_null(MIN_INT)
 
     def test_is_null_with_normal_ints(self):
         """Test that is_null returns False for regular integers."""

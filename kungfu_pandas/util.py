@@ -289,7 +289,7 @@ def parallel_reduce(reducer, reduce_func_name: str, chunked_args):
             max=np.maximum,
             min=np.minimum,
         )[reduce_func_name]
-    except:
+    except KeyError:
         raise ValueError(f"Multi-threading not supported for {reduce_func_name}")
     results = parallel_map(reducer, chunked_args)
     return reduce(reduce_func_vec, results)

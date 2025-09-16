@@ -1,17 +1,18 @@
 """
-Pandas-compatible API classes for pandas-plus GroupBy operations.
+Pandas-compatible API classes for kungfu-pandas GroupBy operations.
 
 This module provides familiar pandas-like interfaces that utilize the optimized
-pandas-plus GroupBy engine for better performance while maintaining full compatibility.
+kungfu-pandas GroupBy engine for better performance while maintaining full compatibility.
 """
 
-from typing import Optional, Union, Hashable, Tuple
-import pandas as pd
-import numpy as np
-from functools import wraps
-
-from .core import GroupBy, ArrayType1D
 from abc import ABC, abstractmethod
+from functools import wraps
+from typing import Hashable, Optional, Tuple, Union
+
+import numpy as np
+import pandas as pd
+
+from .core import ArrayType1D, GroupBy
 
 
 def groupby_aggregation(
@@ -113,7 +114,7 @@ def groupby_cumulative(description: str):
 
 class BaseGroupBy(ABC):
     """
-    Abstract base class for pandas-plus GroupBy API classes.
+    Abstract base class for kungfu-pandas GroupBy API classes.
 
     This class contains common functionality shared between SeriesGroupBy
     and DataFrameGroupBy classes.
@@ -423,7 +424,7 @@ class BaseGroupBy(ABC):
 
 class SeriesGroupBy(BaseGroupBy):
     """
-    A pandas-like SeriesGroupBy class that uses pandas-plus GroupBy as the engine.
+    A pandas-like SeriesGroupBy class that uses kungfu-pandas GroupBy as the engine.
 
     This class provides a familiar pandas interface while leveraging the optimized
     GroupBy implementation for better performance.
@@ -443,7 +444,7 @@ class SeriesGroupBy(BaseGroupBy):
     --------
     Basic grouping:
     >>> import pandas as pd
-    >>> from pandas_plus.groupby import SeriesGroupBy
+    >>> from kungfu_pandas.groupby import SeriesGroupBy
     >>> s = pd.Series([1, 2, 3, 4, 5, 6])
     >>> groups = pd.Series(['A', 'B', 'A', 'B', 'A', 'B'])
     >>> gb = SeriesGroupBy(s, by=groups)
@@ -664,7 +665,7 @@ class SeriesGroupByRolling(BaseGroupByRolling):
 
 class DataFrameGroupBy(BaseGroupBy):
     """
-    A pandas-like DataFrameGroupBy class that uses pandas-plus GroupBy as the engine.
+    A pandas-like DataFrameGroupBy class that uses kungfu-pandas GroupBy as the engine.
 
     This class provides a familiar pandas interface for DataFrame grouping operations
     while leveraging the optimized GroupBy implementation for better performance.
@@ -684,7 +685,7 @@ class DataFrameGroupBy(BaseGroupBy):
     --------
     Basic grouping:
     >>> import pandas as pd
-    >>> from pandas_plus.groupby import DataFrameGroupBy
+    >>> from kungfu_pandas.groupby import DataFrameGroupBy
     >>> df = pd.DataFrame({'A': [1, 2, 3, 4], 'B': [10, 20, 30, 40]})
     >>> groups = pd.Series(['X', 'Y', 'X', 'Y'])
     >>> gb = DataFrameGroupBy(df, by=groups)

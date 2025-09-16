@@ -1,4 +1,4 @@
-name: pandas-plus-env
+name: kungfu-pandas-env
 channels:
   - conda-forge
   - defaults
@@ -21,6 +21,10 @@ dependencies:
   - seaborn>=0.11.0
   - conda-build
   - anaconda-client
+  - sphinx>=4.0
+  - sphinx-rtd-theme
+  - sphinxcontrib-napoleon
+  - myst-parser
   - pip
   - setuptools
   - wheel

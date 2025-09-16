@@ -1,18 +1,17 @@
-from typing import Union, Tuple
+from typing import Tuple, Union
 
+import numba as nb
 import numpy as np
 import pandas as pd
 import polars as pl
 import pyarrow as pa
-import numba as nb
 
-
-from pandas_plus.util import (
+from kungfu_pandas.util import (
+    ArrayType1D,
+    _maybe_cast_timestamp_arr,
+    _val_to_numpy,
     get_array_name,
     parallel_map,
-    ArrayType1D,
-    _val_to_numpy,
-    _maybe_cast_timestamp_arr,
 )
 
 
@@ -153,7 +152,7 @@ def factorize_1d(
 
     This method is useful for obtaining a numeric representation of an
     array when all that matters is identifying distinct values. factorize_1d
-    is available as both a top-level function :func:`~pandas_plus.util.factorize_1d`,
+    is available as both a top-level function :func:`~kungfu_pandas.util.factorize_1d`,
     and as a method.
 
     Parameters
@@ -197,7 +196,7 @@ def factorize_1d(
     --------
     >>> import numpy as np
     >>> import pandas as pd
-    >>> from pandas_plus.util import factorize_1d
+    >>> from kungfu_pandas.util import factorize_1d
 
     Basic usage with a list:
 
@@ -393,7 +392,7 @@ def factorize_2d(
     --------
     >>> import numpy as np
     >>> import pandas as pd
-    >>> from pandas_plus.util import factorize_2d
+    >>> from kungfu_pandas.util import factorize_2d
 
     Basic usage with two arrays:
 

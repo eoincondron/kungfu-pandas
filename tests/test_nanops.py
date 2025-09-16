@@ -1,10 +1,10 @@
-import pytest
-
-parametrize = pytest.mark.parametrize
 import numpy as np
 import pandas as pd
+import pytest
 
-from pandas_plus import nanops
+from kungfu_pandas import nanops
+
+parametrize = pytest.mark.parametrize
 
 
 @pytest.fixture(scope="session")

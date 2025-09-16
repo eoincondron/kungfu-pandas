@@ -1,14 +1,15 @@
 """
-Unit tests for pandas-plus GroupBy API classes.
+Unit tests for kungfu-pandas GroupBy API classes.
 
 This module tests SeriesGroupBy and DataFrameGroupBy classes to ensure they
 provide pandas-compatible behavior while leveraging the optimized core.
 """
 
-import pytest
-import pandas as pd
 import numpy as np
-from pandas_plus.groupby import SeriesGroupBy, DataFrameGroupBy
+import pandas as pd
+import pytest
+
+from kungfu_pandas.groupby import DataFrameGroupBy, SeriesGroupBy
 
 
 class TestSeriesGroupBy:

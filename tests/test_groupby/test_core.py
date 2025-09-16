@@ -1,11 +1,12 @@
-import numpy as np
-import pandas as pd
-import pyarrow as pa
-import polars as pl
-import pytest
 import time
 
-from pandas_plus.groupby.core import GroupBy, add_row_margin, crosstab
+import numpy as np
+import pandas as pd
+import polars as pl
+import pyarrow as pa
+import pytest
+
+from kungfu_pandas.groupby.core import GroupBy, add_row_margin, crosstab
 
 from .conftest import assert_pd_equal
 

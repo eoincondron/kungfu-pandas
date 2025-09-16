@@ -1,12 +1,12 @@
-import pytest
 import time
 
 import numpy as np
 import pandas as pd
-import pyarrow as pa
 import polars as pl
+import pyarrow as pa
+import pytest
 
-from pandas_plus.groupby.factorization import (
+from kungfu_pandas.groupby.factorization import (
     factorize_1d,
     factorize_2d,
     monotonic_factorization,

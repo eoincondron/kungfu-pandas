@@ -1,33 +1,33 @@
+import multiprocessing
 from collections.abc import Mapping, Sequence
 from functools import cached_property, wraps
-from typing import Callable, List, Optional, Union, Literal, Tuple
 from inspect import signature
-import multiprocessing
+from typing import Callable, List, Literal, Optional, Tuple, Union
 
 import numpy as np
 import pandas as pd
-from pandas.core.algorithms import factorize_array
 import polars as pl
 import pyarrow as pa
+from pandas.core.algorithms import factorize_array
 
+from ..util import (
+    ArrayType1D,
+    ArrayType2D,
+    _val_to_numpy,
+    array_split_with_chunk_handling,
+    convert_data_to_arr_list_and_keys,
+    get_array_name,
+    is_categorical,
+    mean_from_sum_count,
+    parallel_map,
+    series_is_numeric,
+    to_arrow,
+)
 from . import numba as numba_funcs
 from .factorization import (
     factorize_1d,
     factorize_2d,
     monotonic_factorization,
-)
-from ..util import (
-    ArrayType1D,
-    ArrayType2D,
-    to_arrow,
-    is_categorical,
-    array_split_with_chunk_handling,
-    convert_data_to_arr_list_and_keys,
-    get_array_name,
-    series_is_numeric,
-    parallel_map,
-    mean_from_sum_count,
-    _val_to_numpy,
 )
 
 ArrayCollection = (
@@ -119,26 +119,26 @@ def groupby_method(method):
     if method.__doc__ is None:
         __doc__ = f"""
         Calculate the group-wise {method.__name__} of the given values over the groups defined by `key`
-        
+
         Parameters
         ----------
         key: An array/Series or a container of same, such as dict, list or DataFrame
-            Defines the groups. May be a single dimension like an array or Series, 
-            or multi-dimensional like a list/dict of 1-D arrays or 2-D array/DataFrame. 
+            Defines the groups. May be a single dimension like an array or Series,
+            or multi-dimensional like a list/dict of 1-D arrays or 2-D array/DataFrame.
         values: An array/Series or a container of same, such as dict, list or DataFrame
-            The values to be aggregated. May be a single dimension like an array or Series, 
-            or multi-dimensional like a list/dict of 1-D arrays or 2-D array/DataFrame. 
+            The values to be aggregated. May be a single dimension like an array or Series,
+            or multi-dimensional like a list/dict of 1-D arrays or 2-D array/DataFrame.
         mask: array/Series
             Optional Boolean array which filters elements out of the calculations
-            
+
         Returns
         -------
         pd.Series / pd.DataFrame
-        
-        The result of the group-by calculation. 
-        A Series is returned when `values` is a single array/Series, otherwise a DataFrame. 
-        The index of the result has one level per array/column in the group key. 
-            
+
+        The result of the group-by calculation.
+        A Series is returned when `values` is a single array/Series, otherwise a DataFrame.
+        The index of the result has one level per array/column in the group key.
+
         """
         wrapper.__doc__ = __doc__
 
@@ -274,16 +274,17 @@ class GroupBy:
             codes_list = [mono_codes, *codes_list]
             unique_list = [mono_uniques, *unique_list]
 
-        self._result_index = pd.Index(np.concatenate(unique_list)).unique()
+        self._result_index = pd.Index(np.concatenate(unique_list)).drop_duplicates()
 
         if self._sort:
             self._result_index = self._result_index.sort_values()
             self._index_is_sorted = True  # not necessary to sort now
 
-        arg_list = [(arr,) for arr in unique_list]
-        self._group_key_pointers = parallel_map(
-            self.result_index._engine.get_indexer, arg_list
-        )
+        def get_indexer(index, target):
+            return index.get_indexer(target)
+
+        arg_list = [(pd.Index(self.result_index), arr) for arr in unique_list]
+        self._group_key_pointers = parallel_map(get_indexer, arg_list)
         self._group_ikey = pa.chunked_array(codes_list)
 
     @property
@@ -1827,7 +1828,7 @@ class GroupBy:
         Examples
         --------
         >>> import pandas as pd
-        >>> from pandas_plus.groupby import GroupBy
+        >>> from kungfu_pandas.groupby import GroupBy
         >>> data = pd.DataFrame({
         ...     'group': ['A', 'A', 'B', 'B'],
         ...     'values': [1, 2, 3, 4]
@@ -1878,7 +1879,7 @@ class GroupBy:
         Examples
         --------
         >>> import pandas as pd
-        >>> from pandas_plus.groupby import GroupBy
+        >>> from kungfu_pandas.groupby import GroupBy
         >>> data = pd.DataFrame({
         ...     'group': ['A', 'A', 'B', 'B'],
         ...     'values': [1, 3, 2, 6]

@@ -1,17 +1,17 @@
-from functools import reduce, wraps
+import concurrent.futures
 import operator
 import os
+from functools import reduce, wraps
 from inspect import signature
-from typing import Mapping, Union, Any, Callable, TypeVar, cast, List, Optional, Tuple
-import concurrent.futures
+from typing import Any, Callable, List, Mapping, Optional, Tuple, TypeVar, Union, cast
 
+import numba as nb
 import numpy as np
 import pandas as pd
 import polars as pl
 import pyarrow as pa
-import numba as nb
-from numba.typed import List as NumbaList
 from numba.core.extending import overload
+from numba.typed import List as NumbaList
 from pandas.core.sorting import get_group_index
 
 T = TypeVar("T")
@@ -289,7 +289,7 @@ def parallel_reduce(reducer, reduce_func_name: str, chunked_args):
             max=np.maximum,
             min=np.minimum,
         )[reduce_func_name]
-    except:
+    except KeyError:
         raise ValueError(f"Multi-threading not supported for {reduce_func_name}")
     results = parallel_map(reducer, chunked_args)
     return reduce(reduce_func_vec, results)
@@ -453,7 +453,7 @@ def to_arrow(a: ArrayType1D, zero_copy_only: bool = True) -> pa.Array | pa.Chunk
     >>> import numpy as np
     >>> import pandas as pd
     >>> import pyarrow as pa
-    >>> from pandas_plus.util import to_arrow
+    >>> from kungfu_pandas.util import to_arrow
 
     NumPy array conversion:
     >>> arr = np.array([1, 2, 3, 4, 5])

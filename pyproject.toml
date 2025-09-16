@@ -3,7 +3,7 @@ requires = ["setuptools>=45", "wheel", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pandas-plus"
+name = "kungfu-pandas"
 version = "0.1.0"
 description = "High-performance extension package for pandas with fast groupby operations"
 readme = "README.md"
@@ -55,13 +55,13 @@ test = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/eoincondron/pandas-plus"
-"Bug Reports" = "https://github.com/eoincondron/pandas-plus/issues"
-Source = "https://github.com/eoincondron/pandas-plus"
-Documentation = "https://github.com/eoincondron/pandas-plus/blob/main/README.md"
+Homepage = "https://github.com/eoincondron/kungfu-pandas"
+"Bug Reports" = "https://github.com/eoincondron/kungfu-pandas/issues"
+Source = "https://github.com/eoincondron/kungfu-pandas"
+Documentation = "https://github.com/eoincondron/kungfu-pandas/blob/main/README.md"
 
 [project.scripts]
-pandas-plus = "pandas_plus.__main__:main"
+kungfu-pandas = "pandas_plus.__main__:main"
 
 [tool.setuptools.packages.find]
 where = ["."]

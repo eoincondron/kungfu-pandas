@@ -1,15 +1,17 @@
+from functools import partial
+
 import numba as nb
 import numpy as np
 import pandas as pd
 from pandas.core import nanops
 
 from .util import (
+    NumbaReductionOps,
+    _get_first_non_null,
+    _null_value_for_numpy_type,
     is_null,
     n_threads_from_array_length,
     parallel_map,
-    _null_value_for_numpy_type,
-    _get_first_non_null,
-    NumbaReductionOps,
 )
 
 
@@ -169,8 +171,8 @@ def reduce_2d(
     """
     if axis == 0:
         arr = arr.T
-    mapper = lambda x: reduce_1d(
-        reduce_func_name, x, skipna=skipna, n_threads=n_threads
+    mapper = partial(
+        reduce_1d, reduce_func_name=reduce_func_name, skipna=skipna, n_threads=n_threads
     )
     if n_threads == 1:
         results = list(map(mapper, arr))

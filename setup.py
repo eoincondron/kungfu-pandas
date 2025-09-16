@@ -1,5 +1,6 @@
-from setuptools import setup, find_packages
 import os
+
+from setuptools import find_packages, setup
 
 # Read the contents of README file
 this_directory = os.path.abspath(os.path.dirname(__file__))
@@ -8,18 +9,18 @@ with open(os.path.join(this_directory, "README.md"), encoding="utf-8") as f:
 
 # Read version from __init__.py
 version = {}
-with open(os.path.join(this_directory, "pandas_plus", "__init__.py")) as f:
+with open(os.path.join(this_directory, "kungfu_pandas", "__init__.py")) as f:
     exec(f.read(), version)
 
 setup(
-    name="pandas-plus",
+    name="kungfu-pandas",
     version="0.1.0",
     author="Eoin Condron",
     author_email="econdr@gmail.com",
     description="High-performance extension package for pandas with fast groupby operations",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/eoincondron/pandas-plus",
+    url="https://github.com/eoincondron/kungfu-pandas",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -60,17 +61,23 @@ setup(
             "pytest>=6.0",
             "pytest-xdist",
         ],
+        "docs": [
+            "sphinx>=4.0",
+            "sphinx-rtd-theme",
+            "sphinxcontrib-napoleon",
+            "myst-parser",
+        ],
     },
     entry_points={
         "console_scripts": [
-            "pandas-plus=pandas_plus.__main__:main",
+            "kungfu-pandas=kungfu_pandas.__main__:main",
         ],
     },
     keywords="pandas groupby performance numba numpy data-analysis",
     project_urls={
-        "Bug Reports": "https://github.com/eoincondron/pandas-plus/issues",
-        "Source": "https://github.com/eoincondron/pandas-plus",
-        "Documentation": "https://github.com/eoincondron/pandas-plus/blob/main/README.md",
+        "Bug Reports": "https://github.com/eoincondron/kungfu-pandas/issues",
+        "Source": "https://github.com/eoincondron/kungfu-pandas",
+        "Documentation": "https://github.com/eoincondron/kungfu-pandas/blob/main/README.md",
     },
     include_package_data=True,
     zip_safe=False,

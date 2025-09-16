@@ -3,21 +3,21 @@ import numpy as np
 import pandas as pd
 import polars as pl
 import polars.testing
-import pytest
 import pyarrow as pa
+import pytest
 
-from pandas_plus.util import (
+from kungfu_pandas.util import (
     MAX_INT,
     MIN_INT,
     _get_first_non_null,
     _null_value_for_numpy_type,
+    array_split_with_chunk_handling,
+    bools_to_categorical,
     convert_data_to_arr_list_and_keys,
     get_array_name,
     is_null,
-    pretty_cut,
-    bools_to_categorical,
     nb_dot,
-    array_split_with_chunk_handling,
+    pretty_cut,
     to_arrow,
 )
 

@@ -89,7 +89,7 @@ jobs:
     
     - name: Run full test suite
       run: |
-        pytest tests/ -v --cov=pandas_plus --cov-report=term-missing
+        pytest tests/ -v --cov=kungfu_pandas --cov-report=term-missing
         
     - name: Build distributions
       run: |
@@ -102,10 +102,10 @@ jobs:
         
     - name: Test installation from wheel
       run: |
-        pip uninstall pandas-plus -y || true
+        pip uninstall kungfu-pandas -y || true
         pip install dist/*.whl
         python -c "
-        from pandas_plus.groupby import GroupBy
+        from kungfu_pandas.groupby import GroupBy
         import pandas as pd
         import numpy as np
         gb = GroupBy(pd.Series([0,0,1,1]))
@@ -127,7 +127,7 @@ jobs:
     if: github.event_name == 'release' || (github.event_name == 'workflow_dispatch' && github.event.inputs.publish_pypi == 'true')
     environment:
       name: pypi
-      url: https://pypi.org/p/pandas-plus
+      url: https://pypi.org/p/kungfu-pandas
     
     steps:
     - name: Download build artifacts
@@ -153,17 +153,17 @@ jobs:
     - name: Checkout feedstock repo
       run: |
         echo "Step 1: Wait for PyPI release to propagate (typically 5-10 minutes)"
-        echo "Step 2: Fork https://github.com/conda-forge/pandas-plus-feedstock"
+        echo "Step 2: Fork https://github.com/conda-forge/kungfu-pandas-feedstock"
         echo "Step 3: Update recipe/meta.yaml with new version and dependencies"
         echo "Step 4: Update recipe/meta.yaml sha256 hash from PyPI"
-        echo "Step 5: Submit PR to conda-forge/pandas-plus-feedstock"
+        echo "Step 5: Submit PR to conda-forge/kungfu-pandas-feedstock"
         echo ""
         echo "Alternatively, conda-forge bot may automatically detect the new PyPI release"
         echo "and create a PR within 24 hours. Monitor:"
-        echo "https://github.com/conda-forge/pandas-plus-feedstock/pulls"
+        echo "https://github.com/conda-forge/kungfu-pandas-feedstock/pulls"
         echo ""
         echo "Version released: ${{ needs.validate-release.outputs.version }}"
-        echo "PyPI URL: https://pypi.org/project/pandas-plus/${{ needs.validate-release.outputs.version }}/"
+        echo "PyPI URL: https://pypi.org/project/kungfu-pandas/${{ needs.validate-release.outputs.version }}/"
 
   post-release:
     name: Post-release tasks

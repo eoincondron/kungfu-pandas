@@ -1,10 +1,10 @@
-# pandas-plus
+# kungfu-pandas
 
 A high-performance extension package for pandas that provides fast groupby operations using NumPy and Numba acceleration intended for large data sets. Performance improvements increase as data is scaled up (see benchmarking below). It also provides a more flexible API and convenience methods in the group-by space like adding margins and calculating ratios. 
 
 ## Overview
 
-```pandas-plus``` enhances Pandas groupby functionality with optimized implementations that leverage NumPy arrays and Numba's just-in-time compilation for significant performance improvements. The package is designed to work seamlessly with pandas DataFrames and Series while providing additional flexibility for various array types.
+`kungfu-pandas` enhances Pandas groupby functionality with optimized implementations that leverage NumPy arrays and Numba's just-in-time compilation for significant performance improvements. The package is designed to work seamlessly with pandas DataFrames and Series while providing additional flexibility for various array types.
 
 
 ## Faster GroupBy Operations
@@ -22,7 +22,7 @@ Optimized group-by operations, particularly with categorical data (uses the exis
 
 
 ```python
-from pandas_plus.groupby import GroupBy
+from kungfu_pandas.groupby import GroupBy
 
 arr = np.random.randint(0, 10, 10000)
 keys = arr % 3 + 2
@@ -61,19 +61,19 @@ GroupBy(key_list).size()
 
 ```bash
 # Install dependencies
-conda install pandas-plus
+conda install kungfu-pandas
 ```
 
 ## The GroupBy Class
 
-The core of pandas-plus is the `GroupBy` class located in `pandas_plus.groupby.core`. This class provides efficient groupby operations with a pandas-like API.
+The core of kungfu-pandas is the `GroupBy` class located in `kungfu_pandas.groupby.core`. This class provides efficient groupby operations with a pandas-like API.
 
 ### Basic Usage
 
 
 ### Supported Aggregation Methods
 
-The GroupBy class supports various aggregation functions:
+The GroupBy class supports various aggregation/selection functions:
 
 - `sum()/mean()` - Sum/mean of values in each group
 - `min()/max()` - Min/Max value in each group
@@ -81,8 +81,13 @@ The GroupBy class supports various aggregation functions:
 - `count()` - Count of non-null values in each group
 - `size()` - Total count of values in each group (including nulls)
 - `median()` - Median value in each group
-
-`GroupBy` also supports cumulative group-by methods and rolling group-by methods
+- `head()/tail()/` - The top/bottom N rows/elements in each group
+- `first()/last()` - The first/last non-null elements in each group
+- `nth()` - The nth row/element in each group
+- `shift()` - Shift elements group-wise
+- `diff()` - Diff elements group-wise
+- `rolling_[min()/max()/sum()/mean()]` - rolling aggregations
+- `cum[min()/max()/count()/sum()]` - cumulative aggregations
 
 ### Working with Pandas Data
 
@@ -229,7 +234,7 @@ print(first_two)
 Create pivot tables using the crosstab function:
 
 ```python
-from pandas_plus.groupby import crosstab
+from kungfu_pandas.groupby import crosstab
 
 # Sample data
 index_keys = ['Jan', 'Feb', 'Jan', 'Feb']
@@ -251,7 +256,7 @@ print(result)
 
 ## Performance Benefits
 
-pandas-plus provides significant performance improvements for large datasets:
+kungfu-pandas provides significant performance improvements for large datasets:
 
 - **Numba Acceleration**: JIT compilation for fast numerical operations
 - **Multi-threading**: Automatic parallelization for datasets > 1M rows
@@ -265,7 +270,8 @@ pandas-plus provides significant performance improvements for large datasets:
 - pandas
 - numba
 - pyarrow
-- polars (optional, for polars Series support)
+- polars
+- scipy (optional for `GroupScatter` support)
 
 ## Development
 

@@ -3,7 +3,7 @@ include LICENSE
 include CLAUDE.md
 include environment.yml
 include pyproject.toml
-recursive-include pandas_plus *.py
+recursive-include kungfu_pandas *.py
 recursive-include conda-recipe *
 recursive-include tests *.py
 global-exclude *.pyc

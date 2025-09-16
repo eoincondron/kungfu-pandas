@@ -61,14 +61,14 @@ Source = "https://github.com/eoincondron/kungfu-pandas"
 Documentation = "https://github.com/eoincondron/kungfu-pandas/blob/main/README.md"
 
 [project.scripts]
-kungfu-pandas = "pandas_plus.__main__:main"
+kungfu-pandas = "kungfu_pandas.__main__:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["pandas_plus*"]
+include = ["kungfu_pandas*"]
 
 [tool.setuptools.package-data]
-"pandas_plus" = ["py.typed"]
+"kungfu_pandas" = ["py.typed"]
 
 [tool.black]
 line-length = 88
@@ -92,7 +92,7 @@ extend-exclude = '''
 profile = "black"
 multi_line_output = 3
 line_length = 88
-known_first_party = ["pandas_plus"]
+known_first_party = ["kungfu_pandas"]
 
 [tool.flake8]
 max-line-length = 88

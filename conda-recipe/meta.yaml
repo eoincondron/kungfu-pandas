@@ -13,7 +13,7 @@ build:
   number: 0
   script: python -m pip install . -vv
   entry_points:
-    - kungfu-pandas = pandas_plus:__main__
+    - kungfu-pandas = kungfu_pandas:__main__
 
 requirements:
   host:
@@ -31,15 +31,15 @@ requirements:
 
 test:
   imports:
-    - pandas_plus
-    - pandas_plus.groupby
-    - pandas_plus.groupby.core
-    - pandas_plus.groupby.numba
-    - pandas_plus.plotting
-    - pandas_plus.nanops
-    - pandas_plus.util
+    - kungfu_pandas
+    - kungfu_pandas.groupby
+    - kungfu_pandas.groupby.core
+    - kungfu_pandas.groupby.numba
+    - kungfu_pandas.plotting
+    - kungfu_pandas.nanops
+    - kungfu_pandas.util
   commands:
-    - python -c "import pandas_plus; print('kungfu-pandas imported successfully')"
+    - python -c "import kungfu_pandas; print('kungfu-pandas imported successfully')"
   requires:
     - pytest >=6.0
     - pytest-xdist

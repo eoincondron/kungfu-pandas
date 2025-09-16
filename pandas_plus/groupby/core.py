@@ -11,15 +11,17 @@ import polars as pl
 import pyarrow as pa
 
 from . import numba as numba_funcs
+from .factorization import (
+    factorize_1d,
+    factorize_2d,
+    monotonic_factorization,
+)
 from ..util import (
     ArrayType1D,
     ArrayType2D,
     to_arrow,
     is_categorical,
     array_split_with_chunk_handling,
-    factorize_1d,
-    factorize_2d,
-    monotonic_factorization,
     convert_data_to_arr_list_and_keys,
     get_array_name,
     series_is_numeric,
@@ -209,10 +211,8 @@ class GroupBy:
         else:
             self._sort = sort
             self._group_ikey, self._result_index = factorize_2d(
-                *group_key_list, sort=sort
+                *group_key_list, sort=False
             )
-            if sort:
-                self._index_is_sorted = True
 
     @cached_property
     def _group_key_lengths(self):

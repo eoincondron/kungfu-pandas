@@ -4,12 +4,12 @@ import pandas as pd
 from pandas.core import nanops
 
 from .util import (
+    NumbaReductionOps,
+    _get_first_non_null,
+    _null_value_for_numpy_type,
     is_null,
     n_threads_from_array_length,
     parallel_map,
-    _null_value_for_numpy_type,
-    _get_first_non_null,
-    NumbaReductionOps,
 )
 
 

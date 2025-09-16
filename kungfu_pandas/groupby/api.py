@@ -5,13 +5,14 @@ This module provides familiar pandas-like interfaces that utilize the optimized
 kungfu-pandas GroupBy engine for better performance while maintaining full compatibility.
 """
 
-from typing import Optional, Union, Hashable, Tuple
-import pandas as pd
-import numpy as np
-from functools import wraps
-
-from .core import GroupBy, ArrayType1D
 from abc import ABC, abstractmethod
+from functools import wraps
+from typing import Hashable, Optional, Tuple, Union
+
+import numpy as np
+import pandas as pd
+
+from .core import ArrayType1D, GroupBy
 
 
 def groupby_aggregation(

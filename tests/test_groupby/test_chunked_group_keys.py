@@ -8,8 +8,8 @@ already backed by ChunkedArrays (e.g., from parquet files).
 
 import numpy as np
 import pandas as pd
-import pyarrow as pa
 import polars as pl
+import pyarrow as pa
 import pytest
 
 from kungfu_pandas.groupby.core import GroupBy

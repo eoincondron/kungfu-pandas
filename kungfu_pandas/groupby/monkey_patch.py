@@ -5,9 +5,11 @@ This module provides runtime patching to add our optimized GroupBy implementatio
 as methods on pandas objects, allowing seamless usage like df.groupby_fast('column').sum().
 """
 
+from typing import Any, List, Optional, Union
+
 import pandas as pd
-from typing import Optional, Union, List, Any
-from .api import SeriesGroupBy, DataFrameGroupBy
+
+from .api import DataFrameGroupBy, SeriesGroupBy
 
 
 def groupby_fast_series(

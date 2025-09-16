@@ -1,8 +1,8 @@
 from functools import partialmethod
 from typing import Optional
+
 import numpy as np
 import pandas as pd
-
 
 S = pd.Series
 DF = pd.DataFrame

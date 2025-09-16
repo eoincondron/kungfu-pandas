@@ -6,10 +6,11 @@ Tests various column name types and index level specifications to ensure
 proper handling of non-string identifiers.
 """
 
-import pytest
 import numpy as np
 import pandas as pd
-from kungfu_pandas.groupby.api import SeriesGroupBy, DataFrameGroupBy
+import pytest
+
+from kungfu_pandas.groupby.api import DataFrameGroupBy, SeriesGroupBy
 
 from .conftest import assert_pd_equal
 

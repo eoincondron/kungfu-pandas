@@ -1,7 +1,7 @@
 import inspect
+from functools import reduce, wraps
 from inspect import signature
-from typing import Callable, Optional, List, Tuple
-from functools import wraps, reduce
+from typing import Callable, List, Optional, Tuple
 
 import numba as nb
 import numpy as np
@@ -10,19 +10,18 @@ import polars as pl
 import pyarrow as pa
 from numba.typed import List as NumbaList
 
+from .. import nanops
 from ..util import (
     ArrayType1D,
-    check_data_inputs_aligned,
-    is_null,
-    _null_value_for_numpy_type,
-    _maybe_cast_timestamp_arr,
-    parallel_map,
     NumbaReductionOps,
+    _maybe_cast_timestamp_arr,
+    _null_value_for_numpy_type,
     _scalar_func_decorator,
     _val_to_numpy,
+    check_data_inputs_aligned,
+    is_null,
+    parallel_map,
 )
-from .. import nanops
-
 
 # ===== Array Preparation Methods =====
 

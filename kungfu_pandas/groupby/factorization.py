@@ -1,18 +1,17 @@
-from typing import Union, Tuple
+from typing import Tuple, Union
 
+import numba as nb
 import numpy as np
 import pandas as pd
 import polars as pl
 import pyarrow as pa
-import numba as nb
-
 
 from kungfu_pandas.util import (
+    ArrayType1D,
+    _maybe_cast_timestamp_arr,
+    _val_to_numpy,
     get_array_name,
     parallel_map,
-    ArrayType1D,
-    _val_to_numpy,
-    _maybe_cast_timestamp_arr,
 )
 
 

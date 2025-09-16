@@ -1,34 +1,36 @@
+from inspect import signature
+
 import numba as nb
 import numpy as np
 import pandas as pd
 import pytest
-from inspect import signature
 from numba.typed import List as NumbaList
 
+from kungfu_pandas.groupby import numba
 from kungfu_pandas.groupby.numba import (
     ScalarFuncs,
-    _chunk_groupby_args,
+    _apply_cumulative,
     _apply_group_method_single_chunk,
-    combine_chunk_results_for_unfactorized_key,
+    _chunk_groupby_args,
     combine_chunk_results_for_factorized_key,
-    group_nearby_members,
+    combine_chunk_results_for_unfactorized_key,
+    cumcount,
+    cummax,
+    cummin,
+    cumsum,
     group_count,
-    group_mean,
     group_max,
+    group_mean,
     group_min,
+    group_nearby_members,
     group_sum,
-    rolling_sum,
+    rolling_max,
     rolling_mean,
     rolling_min,
-    rolling_max,
-    _apply_cumulative,
-    cumsum,
-    cumcount,
-    cummin,
-    cummax,
+    rolling_sum,
 )
-from kungfu_pandas.util import is_null as py_isnull, MIN_INT
-from kungfu_pandas.groupby import numba
+from kungfu_pandas.util import MIN_INT
+from kungfu_pandas.util import is_null as py_isnull
 
 
 @nb.njit

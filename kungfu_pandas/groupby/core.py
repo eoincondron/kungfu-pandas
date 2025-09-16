@@ -1,33 +1,33 @@
+import multiprocessing
 from collections.abc import Mapping, Sequence
 from functools import cached_property, wraps
-from typing import Callable, List, Optional, Union, Literal, Tuple
 from inspect import signature
-import multiprocessing
+from typing import Callable, List, Literal, Optional, Tuple, Union
 
 import numpy as np
 import pandas as pd
-from pandas.core.algorithms import factorize_array
 import polars as pl
 import pyarrow as pa
+from pandas.core.algorithms import factorize_array
 
+from ..util import (
+    ArrayType1D,
+    ArrayType2D,
+    _val_to_numpy,
+    array_split_with_chunk_handling,
+    convert_data_to_arr_list_and_keys,
+    get_array_name,
+    is_categorical,
+    mean_from_sum_count,
+    parallel_map,
+    series_is_numeric,
+    to_arrow,
+)
 from . import numba as numba_funcs
 from .factorization import (
     factorize_1d,
     factorize_2d,
     monotonic_factorization,
-)
-from ..util import (
-    ArrayType1D,
-    ArrayType2D,
-    to_arrow,
-    is_categorical,
-    array_split_with_chunk_handling,
-    convert_data_to_arr_list_and_keys,
-    get_array_name,
-    series_is_numeric,
-    parallel_map,
-    mean_from_sum_count,
-    _val_to_numpy,
 )
 
 ArrayCollection = (

@@ -51,11 +51,6 @@ jobs:
         # exit-zero treats all errors as warnings
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=88 --statistics
 
-    - name: Type check with mypy
-      run: |
-        pip install mypy
-        mypy kungfu_pandas --ignore-missing-imports || true
-
     - name: Test with pytest
       run: |
         pytest tests/ -v --cov=kungfu_pandas --cov-report=xml --cov-report=term

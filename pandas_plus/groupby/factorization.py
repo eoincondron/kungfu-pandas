@@ -302,9 +302,7 @@ def _combine_factorizations(
     code_tracker: Union[np.ndarray, nb.typed.Dict],
 ):
     combined_codes = np.zeros(len(codes), dtype="int64")
-    max_n_uniques = min(len(codes), max_product)
-    uniques = codes[:max_n_uniques].copy()
-
+    uniques = codes  # re-purposing codes to gather the uniques. NB that group_id <= i will always hold.
     group_id = 0
     tracker_is_array = len(code_tracker) > 0
     for i in range(len(combined_codes)):
@@ -458,9 +456,15 @@ def factorize_2d(
     codes_list, labels = zip(*factored)
     shape = list(map(len, labels))
     code_arr = np.vstack(codes_list).T
-
-    cartesian_product_size = np.prod(shape)
-    code_weights = cartesian_product_size // np.cumprod(shape)
+    # weights for weighted sum of codes to map them to a 1-dimensional space
+    code_weights = np.cumprod(shape)
+    (
+        code_weights,
+        cartesian_product_size,
+    ) = (
+        code_weights[-1] // code_weights,
+        code_weights[-1],
+    )
 
     if cartesian_product_size < use_dict_limit:
         code_tracker = np.full(cartesian_product_size, -1, dtype="int32")

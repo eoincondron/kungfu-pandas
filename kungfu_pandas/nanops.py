@@ -1,4 +1,4 @@
-from functools import partial
+from inspect import signature
 
 import numba as nb
 import numpy as np
@@ -171,13 +171,21 @@ def reduce_2d(
     """
     if axis == 0:
         arr = arr.T
-    mapper = partial(
-        reduce_1d, reduce_func_name=reduce_func_name, skipna=skipna, n_threads=n_threads
-    )
+
+    arg_list = [
+        signature(reduce_1d)
+        .bind(
+            arr=a, reduce_func_name=reduce_func_name, skipna=skipna, n_threads=n_threads
+        )
+        .args
+        for a in arr
+    ]
+
     if n_threads == 1:
-        results = list(map(mapper, arr))
+        results = [reduce_1d(*args) for args in arg_list]
     else:
-        results = parallel_map(mapper, list(zip(arr)))
+        results = parallel_map(reduce_1d, arg_list)
+
     return np.array(results)
 
 
